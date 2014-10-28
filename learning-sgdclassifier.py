@@ -1,3 +1,5 @@
+# Stochastic Gradient Descent Classifier
+
 import csv
 # from matplotlib import pyplot
 from sklearn.linear_model import SGDClassifier
@@ -17,7 +19,7 @@ def read_data(filename, xy):
     reader = csv.reader(data, delimiter=',')
     for row in reader:
         if (xy == 'x'):
-            # store nothing but the hour
+            # store nothing but the hour and weather
             datalist.append([row[0][11:13], row[4]])
         elif (xy == 'y'):
             # store nothing but the count
