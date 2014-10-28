@@ -48,14 +48,14 @@ print("Finished reading in the data!")
 # (take out later)
 # x_train = [x1 for [x1, x2] in x_train[0:10]]
 # x_test = [x1 for [x1, x2] in x_test[0:10]]
-x_train = x_train[0:10]
-x_test = x_test[0:10]
-y_train = y_train[0:10]
-# maybe keep these so that our
-x_train = (x_train, 2)
-x_test = (x_test, 2)
-print(x_train)
-print(x_test)
+# x_train = x_train[0:10]
+# x_test = x_test[0:10]
+# y_train = y_train[0:10]
+# maybe keep these?
+# x_train = (x_train, 2)
+# x_test = (x_test, 2)
+# print(x_train)
+# print(x_test)
 ################################################################################
 # fit regression model
 
@@ -65,9 +65,6 @@ svr_lin = SVR(kernel='linear', C=1e3)
 svr_poly = SVR(kernel='poly', C=1e3, degree=2)
 print("Finished creating our trainers!")
 print("Let's start training our models...")
-# we currently have an error here:
-# apparently, "X has 1 samples, but y has 10."
-# which is weird, because we trim both of them to 10x1s earlier
 model_rbf = svr_rbf.fit(x_train, y_train)
 model_lin = svr_lin.fit(x_train, y_train)
 model_poly = svr_poly.fit(x_train, y_train)
