@@ -1,4 +1,6 @@
-# Stochastic Gradient Descent Classifier
+# Kaggle Bike Sharing Demand
+# Joey L. Maalouf
+# Approach: Stochastic Gradient Descent Classifier
 
 import csv
 # from matplotlib import pyplot

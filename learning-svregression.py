@@ -1,13 +1,15 @@
-# Support Vector Regression
+# Kaggle Bike Sharing Demand
+# Joey L. Maalouf
+# Approach: Support Vector Regression
 
-###############################################################################
+################################################################################
 # import any necessary modules
 
 import csv
 from sklearn.svm import SVR
 import matplotlib.pyplot as plt
 
-###############################################################################
+################################################################################
 # define our functions
 
 
@@ -25,15 +27,15 @@ def read_data(filename, xy):
     reader = csv.reader(data, delimiter=',')
     for row in reader:
         if (xy == 'x'):
-            # store nothing but the hour and weather
+            # store just the hour and weather
             datalist.append([row[0][11:13], row[4]])
         elif (xy == 'y'):
-            # store nothing but the count
+            # store just the count
             datalist.append(row[11])
     datalist = [to_int(i) for i in datalist[1:]]
     return datalist
 
-###############################################################################
+################################################################################
 # read in the data
 
 print("Let's start reading in the data...")
@@ -44,15 +46,17 @@ print("Finished reading in the data!")
 
 # shorten datasets for the sake of seeing if the model works:
 # (take out later)
+# x_train = [x1 for [x1, x2] in x_train[0:10]]
+# x_test = [x1 for [x1, x2] in x_test[0:10]]
 x_train = x_train[0:10]
-x_train = [x1 for [x1, x2] in x_train]
 x_test = x_test[0:10]
-x_test = [x1 for [x1, x2] in x_test]
 y_train = y_train[0:10]
+# maybe keep these so that our
+x_train = (x_train, 2)
+x_test = (x_test, 2)
 print(x_train)
-print(y_train)
-
-###############################################################################
+print(x_test)
+################################################################################
 # fit regression model
 
 print("Let's start creating our trainers...")
@@ -74,7 +78,7 @@ y_test_lin = model_lin.predict(x_test)
 y_test_poly = model_poly.predict(x_test)
 print("Finished predicting our new data!")
 
-###############################################################################
+################################################################################
 # look at the results
 
 plt.scatter(x_train, y_train, c='k', label='data')
