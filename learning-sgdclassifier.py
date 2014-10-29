@@ -2,11 +2,13 @@
 # Joey L. Maalouf
 # Approach: Stochastic Gradient Descent Classifier
 
+# -- import any necessary modules ----------------------------------------------
 import csv
 # from matplotlib import pyplot
 from sklearn.linear_model import SGDClassifier
 
 
+# -- define our functions ------------------------------------------------------
 def to_int(input):
     try:
         return int(input)
@@ -29,10 +31,14 @@ def read_data(filename, xy):
     datalist = [to_int(i) for i in datalist[1:]]
     return datalist
 
+
+# -- read in the data ----------------------------------------------------------
 x_train = read_data('train.csv', 'x')
 x_test = read_data('test.csv', 'x')
 y_train = read_data('train.csv', 'y')
 
+
+# -- fit regression model ------------------------------------------------------
 clf = SGDClassifier(loss="log", penalty="l2")
 clf.fit(x_train, y_train)
 y_test = clf.predict(x_test)

@@ -2,17 +2,13 @@
 # Joey L. Maalouf
 # Approach: Support Vector Regression
 
-################################################################################
-# import any necessary modules
-
+# -- import any necessary modules ----------------------------------------------
 import csv
 from sklearn.svm import SVR
 import matplotlib.pyplot as plt
 
-################################################################################
-# define our functions
 
-
+# -- define our functions ------------------------------------------------------
 def to_int(input):
     try:
         return int(input)
@@ -34,9 +30,8 @@ def read_data(filename, xy):
             datalist.append(row[11])
     return [to_int(i) for i in datalist[1:]]
 
-################################################################################
-# read in the data
 
+# -- read in the data ----------------------------------------------------------
 print("Let's start reading in the data...")
 x_train = read_data('train.csv', 'x')
 x_test = read_data('test.csv', 'x')
@@ -56,9 +51,8 @@ print("Finished reading in the data!\n")
 # print(x_train)
 # print(x_test)
 
-################################################################################
-# fit regression model
 
+# -- fit regression model ------------------------------------------------------
 print("Let's start creating our trainers...")
 svr_rbf = SVR(kernel='rbf', C=1e3, gamma=0.1)
 # svr_lin = SVR(kernel='linear', C=1e3)
@@ -75,9 +69,8 @@ y_test_rbf = model_rbf.predict(x_test)
 y_test_poly = model_poly.predict(x_test)
 print("Finished predicting our new data!\n")
 
-################################################################################
-# look at the results
 
+# -- look at the results -------------------------------------------------------
 # TODO: since we have 2 features, do a 3d plot! duh
 plt.scatter(x_train, y_train, c='k', label='data')
 plt.hold('on')
