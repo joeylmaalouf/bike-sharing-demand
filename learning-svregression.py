@@ -5,7 +5,8 @@
 # -- import any necessary modules ----------------------------------------------
 import csv
 from sklearn.svm import SVR
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D as a3d
 
 
 # -- define our functions ------------------------------------------------------
@@ -55,30 +56,34 @@ print("Finished reading in the data!\n")
 # -- fit regression model ------------------------------------------------------
 print("Let's start creating our trainers...")
 svr_rbf = SVR(kernel='rbf', C=1e3, gamma=0.1)
-# svr_lin = SVR(kernel='linear', C=1e3)
 svr_poly = SVR(kernel='poly', C=1e3, degree=2)  # increase degree (better fit)?
 print("Finished creating our trainers!\n")
 print("Let's start training our models...")
 model_rbf = svr_rbf.fit(x_train, y_train)
-# model_lin = svr_lin.fit(x_train, y_train)
 model_poly = svr_poly.fit(x_train, y_train)
 print("Finished training our models!\n")
 print("Let's start predicting our new data...")
 y_test_rbf = model_rbf.predict(x_test)
-# y_test_lin = model_lin.predict(x_test)
 y_test_poly = model_poly.predict(x_test)
 print("Finished predicting our new data!\n")
 
 
 # -- look at the results -------------------------------------------------------
-# TODO: since we have 2 features, do a 3d plot! duh
-plt.scatter(x_train, y_train, c='k', label='data')
-plt.hold('on')
-plt.plot(x_test, y_test_rbf, c='g', label='RBF model')
-# plt.plot(x_test, y_test_lin, c='r', label='Linear model')
-plt.plot(x_test, y_test_poly, c='b', label='Polynomial model')
-plt.xlabel('data')
-plt.ylabel('target')
-plt.title('Support Vector Regression')
-plt.legend()
-plt.show()
+# plt.scatter(x_train, y_train, c='k', label='data')
+# plt.hold('on')
+# plt.plot(x_test, y_test_rbf, c='g', label='RBF model')
+# plt.plot(x_test, y_test_poly, c='b', label='Polynomial model')
+#plt.xlabel('data')
+#plt.ylabel('target')
+#plt.title('Support Vector Regression')
+#plt.legend()
+#plt.show()
+a3d.scatter(x_train[:, 0], x_train[:, 1], y_train,
+            c='k', label='data')
+a3d.hold('on')
+a3d.plot_surface(x_test[:, 0], x_test[:, 1], y_test_rbf,
+                 c='g', label='RBF model')
+a3d.plot_surface(x_test[:, 0], x_test[:, 1], y_test_poly,
+                 c='b', label='Polynomial model')
+a3d.legend()
+a3d.show()
