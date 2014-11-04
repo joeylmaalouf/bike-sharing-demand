@@ -6,7 +6,7 @@
 import csv
 from sklearn.svm import SVR
 # import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D as a3d
+# from mpl_toolkits.mplot3d import Axes3D as a3d
 
 
 # -- define our functions ------------------------------------------------------
@@ -73,17 +73,33 @@ print("Finished predicting our new data!\n")
 # plt.hold('on')
 # plt.plot(x_test, y_test_rbf, c='g', label='RBF model')
 # plt.plot(x_test, y_test_poly, c='b', label='Polynomial model')
-#plt.xlabel('data')
-#plt.ylabel('target')
-#plt.title('Support Vector Regression')
-#plt.legend()
-#plt.show()
-a3d.scatter(x_train[:, 0], x_train[:, 1], y_train,
-            c='k', label='data')
-a3d.hold('on')
-a3d.plot_surface(x_test[:, 0], x_test[:, 1], y_test_rbf,
-                 c='g', label='RBF model')
-a3d.plot_surface(x_test[:, 0], x_test[:, 1], y_test_poly,
-                 c='b', label='Polynomial model')
-a3d.legend()
-a3d.show()
+# plt.xlabel('data')
+# plt.ylabel('target')
+# plt.title('Support Vector Regression')
+# plt.legend()
+# plt.show()
+# x_train_0, x_train_1 = zip(*x_train)
+# a3d.scatter(x_train_0, x_train_1, y_train,
+#             c='k', label='data')
+# a3d.hold('on')
+# x_test_0, x_test_1 = zip(*x_test)
+# a3d.plot_surface(x_test_0, x_test_1, y_test_rbf,
+#                  c='g', label='RBF model')
+# a3d.plot_surface(x_test_0, x_test_1, y_test_poly,
+#                  c='b', label='Polynomial model')
+# a3d.legend()
+# a3d.show()
+# plotting is being a pain, so we'll just print the output for now
+# print("Hour: Weather: RBF: Poly:")
+# for i in range(len(x_test)):
+#     print("%03d   %03d      %03d  %03d" %
+#           (x_test[i][0], x_test[i][1], y_test_rbf[i], y_test_poly[i]))
+with open("predictions.csv", "w") as output:
+    output.write("hour,weather,rbf,poly\n")
+    for i in range(len(x_test)):
+        output.write("%d,%d,%d,%d\n" %
+                     (x_test[i][0], x_test[i][1],
+                      y_test_rbf[i], y_test_poly[i]))
+with open("predicted_output.csv", "w") as output:
+    for i in range(len(x_test)):
+        output.write("%d\n" % y_test_rbf[i])
