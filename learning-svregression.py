@@ -1,6 +1,7 @@
 # Kaggle Bike Sharing Demand
 # Joey L. Maalouf
 # Approach: Support Vector Regression
+# To do: Learn the details of SVR and RBF.
 
 # -- import any necessary modules ----------------------------------------------
 import csv
