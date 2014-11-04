@@ -96,7 +96,7 @@ print("Finished predicting our new data!\n")
 #     print("%03d   %03d      %03d  %03d" %
 #           (x_test[i][0], x_test[i][1], y_test_rbf[i], y_test_poly[i]))
 with open("predictions.csv", "w") as output:
-    output.write("hour,weather,rbf,poly\n")
+    output.write("input,input,output,output\nhour,weather,rbf,poly\n")
     for i in range(len(x_test)):
         output.write("%d,%d,%d,%d\n" %
                      (x_test[i][0], x_test[i][1],
