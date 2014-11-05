@@ -38,16 +38,24 @@ x_test = read_data('test.csv', 'x')
 y_train = read_data('train.csv', 'y')
 print("Finished reading in the data!\n")
 # TODO: NORMALIZE DATA
-# http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html
+# sklearn.preprocessing.StandardScaler
 # or subtract mean and divide by standard deviation?
 
 # -- fit regression model ------------------------------------------------------
 print("Let's start instantiating our model...")
-# svr = SVR(kernel='rbf', C=1e3, gamma=0.1)
 parameters = \
     [
-        {'kernel': ['rbf'], 'C': [1e1, 1e2, 1e3], 'gamma': [0.1, 0.01, 0.001]},
-        {'kernel': ['poly'], 'C': [1e1, 1e2, 1e3]},
+        {
+            'kernel': ['rbf'],
+            'C': [1e3, 1e2, 1e1],
+            'gamma': [1e0, 1e-1, 1e-2, 1e-3]
+        },
+        {
+            'kernel': ['poly'],
+            'C': [1e3, 1e2, 1e1],
+            'gamma': [1e0, 1e-1, 1e-2, 1e-3],
+            'degree': [2, 3, 4]
+        }
     ]
 svr = GridSearchCV(SVR(), parameters)
 print("Finished instantiating our model!\n")
@@ -65,7 +73,8 @@ print(svr.best_params_)
 print("\nScorer:")
 print(svr.scorer_)
 print("\nGrid scores:")
-print(svr.grid_scores_)
+for s in svr.grid_scores_:
+    print(s)
 
 # -- output the results --------------------------------------------------------
 with open("predicted_output.csv", "w") as output:
