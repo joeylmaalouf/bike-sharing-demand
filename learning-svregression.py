@@ -28,7 +28,7 @@ def read_data(filename, xy):
         elif (xy == 'y'):
             # store just the count
             datalist.append(row[11])
-    return [to_int(i) for i in datalist[1:30]]
+    return [to_int(i) for i in datalist[1:]]
 
 
 # -- read in the data ----------------------------------------------------------
@@ -37,6 +37,9 @@ x_train = read_data('train.csv', 'x')
 x_test = read_data('test.csv', 'x')
 y_train = read_data('train.csv', 'y')
 print("Finished reading in the data!\n")
+# TODO: NORMALIZE DATA
+# http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html
+# or subtract mean and divide by standard deviation?
 
 # -- fit regression model ------------------------------------------------------
 print("Let's start instantiating our model...")
@@ -50,14 +53,15 @@ svr = GridSearchCV(SVR(), parameters)
 print("Finished instantiating our model!\n")
 print("Let's start training our model...")
 model = svr.fit(x_train, y_train)
-print(svr.best_estimator_)
-print(svr.best_params_)
-print(svr.scorer_)
-print(svr.grid_scores_)
 print("Finished training our model!\n")
 print("Let's start predicting our new data...")
 y_test = model.predict(x_test)
 print("Finished predicting our new data!\n")
+
+print("Best estimator: {}\n" % svr.best_estimator_)
+print("Best parameters: {}\n" % svr.best_params_)
+print("Scorer: {}\n" % svr.scorer_)
+print("Grid scores: {}\n" % svr.grid_scores_)
 
 # -- output the results --------------------------------------------------------
 with open("predicted_output.csv", "w") as output:
