@@ -37,9 +37,12 @@ x_train = read_data('train.csv', 'x')
 x_test = read_data('test.csv', 'x')
 y_train = read_data('train.csv', 'y')
 print("Finished reading in the data!\n")
-# TODO: NORMALIZE DATA
+
+################################################################################
+# TO DO: NORMALIZE DATA
 # sklearn.preprocessing.StandardScaler
 # or subtract mean and divide by standard deviation?
+################################################################################
 
 # -- fit regression model ------------------------------------------------------
 print("Let's start instantiating our model...")
