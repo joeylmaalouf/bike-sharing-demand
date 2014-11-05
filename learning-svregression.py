@@ -58,10 +58,14 @@ print("Let's start predicting our new data...")
 y_test = model.predict(x_test)
 print("Finished predicting our new data!\n")
 
-print("Best estimator: {}\n" % svr.best_estimator_)
-print("Best parameters: {}\n" % svr.best_params_)
-print("Scorer: {}\n" % svr.scorer_)
-print("Grid scores: {}\n" % svr.grid_scores_)
+print("\nBest estimator:")
+print(svr.best_estimator_)
+print("\nBest parameters:")
+print(svr.best_params_)
+print("\nScorer:")
+print(svr.scorer_)
+print("\nGrid scores:")
+print(svr.grid_scores_)
 
 # -- output the results --------------------------------------------------------
 with open("predicted_output.csv", "w") as output:
