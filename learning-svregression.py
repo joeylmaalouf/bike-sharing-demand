@@ -61,6 +61,7 @@ parameters = \
         }
     ]
 svr = GridSearchCV(SVR(), parameters)
+# svr = SVR(kernel='rbf', C=1000, gamma=0.1)
 print("Finished instantiating our model!\n")
 print("Let's start training our model...")
 model = svr.fit(x_train, y_train)
