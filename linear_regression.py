@@ -1,11 +1,10 @@
 # Kaggle Bike Sharing Demand
 # Joey L. Maalouf
-# Approach: Support Vector Regression
+# Approach: Linear Regression
 
 # -- import any necessary modules ----------------------------------------------
 import csv
-from sklearn.svm import SVR
-# from sklearn.grid_search import GridSearchCV
+from sklearn import linear_model
 
 
 # -- define our functions ------------------------------------------------------
@@ -40,51 +39,20 @@ y_train = read_data("train.csv", "y")
 x_test = read_data("test.csv", "x")
 print("Finished reading in the data!\n")
 
-################################################################################
-# TO DO: NORMALIZE DATA
-# sklearn.preprocessing.StandardScaler
-# or subtract mean and divide by standard deviation?
-################################################################################
-
 # -- fit regression model ------------------------------------------------------
 print("Let's start instantiating our model...")
-# parameters = \
-#     [
-#         {
-#             "kernel": ["rbf"],
-#             "C": [1e3, 1e2, 1e1],
-#             "gamma": [1e0, 1e-1, 1e-2, 1e-3]
-#         },
-#         {
-#             "kernel": ["poly"],
-#             "C": [1e3, 1e2, 1e1],
-#             "gamma": [1e0, 1e-1, 1e-2, 1e-3],
-#             "degree": [2, 3, 4]
-#         }
-#     ]
-# svr = GridSearchCV(SVR(), parameters)
-svr = SVR(kernel="rbf", C=1000, gamma=0.1)
+linear = linear_model.LinearRegression()
 print("Finished instantiating our model!\n")
 print("Let's start training our model...")
-model = svr.fit(x_train, y_train)
+model = linear.fit(x_train, y_train)
 print("Finished training our model!\n")
 print("Let's start predicting our new data...")
-y_test = model.predict(x_test)
+y_test = [abs(i) for i in model.predict(x_test)]
 print("Finished predicting our new data!\n")
-
-# print("\nBest estimator:")
-# print(svr.best_estimator_)
-# print("\nBest parameters:")
-# print(svr.best_params_)
-# print("\nScorer:")
-# print(svr.scorer_)
-# print("\nGrid scores:")
-# for s in svr.grid_scores_:
-#     print(s)
 
 # -- output the results --------------------------------------------------------
 datetime = read_data("test.csv", "xx")
-with open("predicted_output.csv", "w") as output:
+with open("predicted_output_lin.csv", "w") as output:
     output.write("datetime,count\n")
     for i in range(len(y_test)):
         output.write("%s,%d\n" % (datetime[i], y_test[i]))
